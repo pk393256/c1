@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p id="data">
+if(JSON.parse(localStorage.getItem('pname'))==null){
+fetch(`https://pokeapi.co/api/v2/pokemon/`).then((response) => {
+/* console.log(response.status) */
+  return response.json();
+})
+  .then((result) => {
+    // console.log(result)
+    localStorage.setItem('pname',JSON.stringify(result))
+    
+    
+  }).catch((err)=>{
+      console.log(err)
+})
+}
+else{
+var result=JSON.parse(localStorage.getItem('pname'))
 
-    </p>
-</body>
-<script href="./code.js"></script>
-
-</html>
+for(var i=0;i<20;i++){
+    document.getElementById('data').innerHTML+=
+    result['results'][i].name +'<br>';
+    
+}
+}
